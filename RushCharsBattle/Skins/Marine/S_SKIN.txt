@@ -1,0 +1,16 @@
+name = marine
+realname = Marine
+hudname = MARINE
+ability = CA_NONE
+ability2 = CA2_MELEE
+height = 42
+mindash = 0
+maxdash = 50
+jumpfactor = 1.1
+thokitem = MT_MARINE_PUNCH
+prefcolor = Matey
+supercolor = Sky
+revitem = MT_NULL
+contspeed = 1
+contangle = 1
+flags = SF_MULTIABILITY|SF_NONIGHTSSUPER|SF_NOJUMPSPIN|SF_NOJUMPDAMAGE|SF_NOSHIELDABILITY

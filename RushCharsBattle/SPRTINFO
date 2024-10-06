@@ -1,0 +1,101 @@
+Sprite2 NFLY
+{
+	Skin blaze
+	Frame A
+	{
+		XPivot 40
+		YPivot 48
+		RotAxis Z
+	}
+}
+
+Sprite2 NDRL
+{
+	Skin blaze
+	Frame A
+	{
+		XPivot 40
+		YPivot 48
+		RotAxis Z
+	}
+	Frame B
+	{
+		XPivot 40
+		YPivot 48
+		RotAxis Z
+	}
+	Frame C
+	{
+		XPivot 40
+		YPivot 48
+		RotAxis Z
+	}
+	Frame D
+	{
+		XPivot 40
+		YPivot 48
+		RotAxis Z
+	}
+}
+
+Sprite2 NPUL
+{
+	Skin blaze
+	Frame A
+	{
+		XPivot 40
+		YPivot 48
+		RotAxis Z
+	}
+}
+
+Sprite2 NFLY
+{
+	Skin marine
+	Frame A
+	{
+		XPivot 30
+		YPivot 20
+		RotAxis Z
+	}
+}
+
+Sprite2 NDRL
+{
+	Skin marine
+	Frame A
+	{
+		XPivot 30
+		YPivot 20
+		RotAxis Z
+	}
+	Frame B
+	{
+		XPivot 30
+		YPivot 20
+		RotAxis Z
+	}
+	Frame C
+	{
+		XPivot 30
+		YPivot 20
+		RotAxis Z
+	}
+	Frame D
+	{
+		XPivot 30
+		YPivot 20
+		RotAxis Z
+	}
+}
+
+Sprite2 NPUL
+{
+	Skin marine
+	Frame A
+	{
+		XPivot 30
+		YPivot 20
+		RotAxis Z
+	}
+}
