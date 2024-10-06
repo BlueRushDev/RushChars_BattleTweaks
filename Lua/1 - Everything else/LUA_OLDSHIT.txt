@@ -1,0 +1,249 @@
+--Really old blaze code ported from (early) 2.1. Over 10 years old and we're still using it for some reason.
+freeslot("SPR_BLFR", "sfx_blzjmp", "sfx_blzhvr", "sfx_blzrev")
+
+sfxinfo[sfx_blzjmp].caption = "Tornado fire"
+sfxinfo[sfx_blzhvr].caption = "Hover"
+sfxinfo[sfx_blzrev].caption = "Burst dash"
+
+//Lerp function.
+/*local function Lerp(min, max, fac)
+	return (min + FixedMul(fac, (max - min)))
+end*/
+
+local function set_add(mo) mo.blendmode = AST_ADD end
+
+local preent = 5
+addHook("ThinkFrame", do
+	for player in players.iterate
+		if not player.mo or player.mo.skin != "blaze" then continue end
+		if P_PlayerInPain(player) return end
+		local mo = player.mo		-- im lazy what can i say
+	
+		-- HANDLE HOVER
+		
+		if mo.blazejumpt == nil
+			mo.blazejumpt = 0
+		end
+
+		if player.cmd.buttons & BT_JUMP
+			mo.blazejumpt = $1+1
+				
+			if mo.blazejumpt == 1
+				mo.blazejump = true
+			else
+				mo.blazejump = false
+			end
+		else
+			mo.blazejumpt = 0
+			mo.blazejump = false
+		end
+
+
+		if (player.cmd.buttons & BT_SPIN) 
+			mo.holdspin = true
+		else
+			mo.holdspin = false
+		end
+		
+
+		/*if mo.blazejump
+		and mo.blazejumping > 3	-- don' trigger on first jump frame
+		and not (player.powers[pw_carry])
+			if not mo.hoverinjump	-- bad
+				mo.hovertimer = 125
+			end
+			mo.hoverinjump = true
+			S_StartSound(player.mo, sfx_blzhvr)
+			mo.momz = 0
+		end
+		
+		if P_IsObjectOnGround(mo)
+			mo.hoverinjump = nil
+			mo.hovertimer = 0
+		end
+		
+		if (player.powers[pw_carry])
+			mo.hoverinjump = nil
+			mo.hovertimer = 0
+		end
+
+		if mo.hovertimer
+		and mo.hoverinjump
+		and not P_IsObjectOnGround(mo)
+		and not (player.powers[pw_carry])
+			
+			if player.cmd.buttons & BT_JUMP
+
+				mo.blazejumping = false
+				mo.hovertimer = $1-1
+				P_SetObjectMomZ(player.mo, FixedMul(mo.scale, Lerp(-3*FRACUNIT, 0, FixedDiv(mo.hovertimer*FRACUNIT, 105*FRACUNIT))), false)
+				player.pflags = $1 & !PF_JUMPED
+				player.mo.state = S_PLAY_FALL
+		
+				local limit = 6*FRACUNIT
+				local hypot = FixedHypot(player.mo.momx, player.mo.momy)
+		
+				if hypot > limit
+					--local slope = FixedMul(mo.scale, FixedDiv(player.mo.momy, player.mo.momx))
+					local ratio = FixedMul(mo.scale, FixedDiv(hypot, limit))
+				end
+				if not (player.flame1 and player.flame1.valid) and not (player.flame2 and player.flame2.valid)--leveltime % 7 == 0
+					local flame1 = P_SpawnMobjFromMobj(player.mo, P_ReturnThrustX(flame1, player.drawangle+FixedAngle(180*FRACUNIT), 7*FRACUNIT)+
+					P_ReturnThrustX(flame1, player.drawangle+FixedAngle(90*FRACUNIT), 5*FRACUNIT), 
+					P_ReturnThrustY(flame1, player.drawangle+FixedAngle(180*FRACUNIT), 7*FRACUNIT)+
+					P_ReturnThrustX(flame1, player.drawangle+FixedAngle(90*FRACUNIT), 5*FRACUNIT), 
+					-20*FRACUNIT*P_MobjFlip(player.mo), MT_BLAZE_HOVERFIRE)
+					flame1.invuln = 7
+					flame1.target = player.mo
+					flame1.flame1 = true
+					flame1.scale = player.mo.scale --+ player.mo.scale/4
+					player.flame1 = flame1
+					local flame2 = P_SpawnMobjFromMobj(player.mo, P_ReturnThrustX(flame2, player.drawangle+FixedAngle(180*FRACUNIT), 7*FRACUNIT)+
+					P_ReturnThrustX(flame1, player.drawangle+FixedAngle(-90*FRACUNIT), 5*FRACUNIT),
+					P_ReturnThrustY(flame2, player.drawangle+FixedAngle(180*FRACUNIT), 7*FRACUNIT)+
+					P_ReturnThrustY(flame1, player.drawangle+FixedAngle(-90*FRACUNIT), 5*FRACUNIT), 
+					-20*FRACUNIT*P_MobjFlip(player.mo), MT_BLAZE_HOVERFIRE)
+					flame2.invuln = 7
+					flame2.target = player.mo
+					flame2.flame2 = true
+					flame2.scale = player.mo.scale --+ player.mo.scale/4
+					player.flame2 = flame2
+				end
+			end
+		end*/
+		
+		
+		-- HOVER END
+		
+		/*if mo.hovertimer == nil or P_IsObjectOnGround(player.mo)
+			mo.hovertimer = 125
+		elseif mo.hovertimer > 0 and mo.hovertimer < 105 and not (player.cmd.buttons & BT_SPIN) and not P_IsObjectOnGround(player.mo)
+			mo.hovertimer = 0
+		end*/
+	
+		local cv_chasecam = CV_FindVar("chasecam")
+		local cv_chasecam2 = CV_FindVar("chasecam2")
+		if mo.blazejumping --or mo.spintimer > 1 or player.mo.state == S_PLAY_ROLL
+		--or player.pflags & PF_SPINNING and not (player.pflags & (PF_STARTDASH | PF_JUMPED))
+
+			-- blaze tornado fire
+			--player.mo.sprite2 = SPR2_FIRE
+			--player.mo.frame = (leveltime/2) % 4
+			
+			local spawndir = (leveltime % 17) * ANG20
+			local xdist = FixedMul(FRACUNIT, FixedMul(21*FRACUNIT, cos(spawndir)))
+			local ydist = FixedMul(FRACUNIT, FixedMul(21*FRACUNIT, sin(spawndir)))
+			if not (player.mo.eflags & MFE_UNDERWATER)
+				local flame1 = P_SpawnMobjFromMobj(player.mo, 0+xdist,0+ydist, 0+(20*FRACUNIT), MT_BLAZE_JUMPFIRE)
+				local flame2 = P_SpawnMobjFromMobj(player.mo, 0-xdist, 0-ydist, 0+(20*FRACUNIT), MT_BLAZE_JUMPFIRE)
+				set_add(flame1)
+				set_add(flame2)	
+				if ((player == displayplayer) and not cv_chasecam.value) or ((player == secondarydisplayplayer) and not cv_chasecam2.value)
+					flame1.flags2 = $|MF2_DONTDRAW
+					flame2.flags2 = $|MF2_DONTDRAW
+				end
+				--flame1.sprite = SPR_DFLM
+				--flame1.frame = F|FF_FULLBRIGHT|TR_TRANS70
+				flame1.fuse = 12
+				flame1.scale = mo.scale-mo.scale/2
+				flame1.destscale = 50*mo.scale
+				flame1.scalespeed = mo.scale/8
+				flame1.target = mo
+				flame1.color = player.blazeflamecolor
+				--flame2.sprite = SPR_DFLM
+				--flame2.frame = F|FF_FULLBRIGHT|TR_TRANS70
+				flame2.fuse = 12
+				flame2.scale = mo.scale-mo.scale/2
+				flame2.destscale = 50*mo.scale
+				flame2.scalespeed = mo.scale/8
+				flame2.target = mo
+				flame2.color = player.blazeflamecolor
+			else
+				local flame1 = P_SpawnMobjFromMobj(player.mo, 0+xdist,0+ydist, 0+(20*mo.scale), MT_PARTICLE)
+				local flame2 = P_SpawnMobjFromMobj(player.mo, 0-xdist, 0-ydist, 0+(20*mo.scale), MT_PARTICLE)
+				flame1.tics = 35
+				--flame1.fuse = 6
+				flame1.scale = 1
+				flame1.destscale = mo.scale*5
+				flame1.scalespeed = mo.scale/12
+				flame1.momz = FixedMul(mo.scale, 2*FRACUNIT)
+				
+				flame2.tics = 35
+				--flame2.fuse = 6
+				flame2.scale = 1
+				flame2.destscale = mo.scale*5
+				flame2.scalespeed = mo.scale/12
+				flame2.momz = FixedMul(mo.scale, 2*FRACUNIT)
+			
+			end
+			
+			local ghost = P_SpawnGhostMobj(player.mo)
+			ghost.fuse = 3
+			if ghost.tracer and ghost.tracer.valid
+				ghost.tracer.fuse = 3
+			end
+		end
+	end
+	// katsy note: i moved this here to prevent creating an extra thinkframe hook for no reason
+	if not preent return end
+	preent = $-1
+	if preent return end
+	print("\x89\RushChars \x80\- \x88\Sprites by Inazuma, Lightdasher, and Burning Loaf.", "\x87\Code by Frostiikin, katsy, SMS Alfredo, Lach, Krabs, Jay and Snu. Patch by JoJo & Rush")
+end)
+
+addHook("MobjThinker", function(mo)
+	if not (mo and mo.valid and mo.health and mo.target and mo.target.valid and mo.target.health) return end
+	if mo.fuse > 7
+		mo.momx = mo.target.momx
+		mo.momy = mo.target.momy
+	else
+		mo.momx = 0
+		mo.momy = 0
+	end
+end, MT_BLAZE_JUMPFIRE)
+
+
+/*addHook("MobjThinker", function(dust)
+	if not (dust and dust.valid and dust.target   ) return end
+	local pmo = dust.target
+	if (pmo and pmo.valid and pmo.skin == "blaze")
+		if not (pmo.eflags & MFE_UNDERWATER)
+			P_RemoveMobj(dust)
+		--elseif (dust.state >= S_SPINDUST1 and dust.state <= S_SPINDUST4)
+			--dust.state = S_BUBBLES1
+		end
+	end
+end, MT_SPINDUST)*/
+
+addHook("MobjDamage", function(mobj, inflictor, source)
+	if inflictor and inflictor.valid and ((inflictor.flags & MF_ENEMY) or (inflictor.flags & MF_BOSS)) and (mobj.blazejumping)
+		P_DamageMobj(inflictor, mobj, mobj, 1)
+		if (inflictor.flags & MF_BOSS)
+			mobj.momx = -mobj.momx
+			mobj.momy = -mobj.momy
+		end
+		mobj.momz = abs(mobj.momz)
+		
+		return true
+	end
+end, MT_PLAYER)
+
+addHook("MobjMoveCollide", function(mobj, othermobj)
+	if (mobj.skin == "blaze") and mobj.player and mobj.player.blazeboosting and (othermobj.type == MT_SPIKE or othermobj.type == MT_WALLSPIKE)
+	and (abs(mobj.z - othermobj.z) <= FixedMul(60<<FRACBITS, othermobj.scale))
+		if mobj.z >= othermobj.z-othermobj.height and mobj.z <= othermobj.z+othermobj.height+othermobj.height
+			P_KillMobj(othermobj, mobj)
+			return false
+		end
+	end
+end, MT_PLAYER)
+
+/*addHook("ShouldDamage", function(mo, inflictor)
+
+	if not mo.player return end
+	if not mo.skin == "blaze" return end
+	
+	if inflictor and inflictor.valid and inflictor.flags & MF_FIRE then return false end
+	if not inflictor and P_PlayerTouchingSectorSpecial(mo.player, 1, 3) return false end
+
+end, MT_PLAYER)*/

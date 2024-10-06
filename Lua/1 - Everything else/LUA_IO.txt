@@ -1,0 +1,90 @@
+local firecolor = "client/rush/firecolor.dat"
+addHook("PlayerSpawn", function(p)
+	if p == consoleplayer
+		if not (gametyperules & GTR_TEAMS)
+			local file = io.openlocal(firecolor)--check for the file
+			if file--do you actually have a file to read
+				COM_BufInsertText(p, "firecolor \""..file:read("*a").."\" silent")
+				file:close()
+			else
+				COM_BufInsertText(p, "firecolor default silent")
+			end
+		end
+	end
+end)
+addHook("PlayerThink", function(p)
+	if(gametyperules & GTR_TEAMS)
+		if p.ctfteam == 1
+			p.blazeflamecolor = SKINCOLOR_RUBY
+		elseif p.ctfteam == 2
+			p.blazeflamecolor = SKINCOLOR_VAPOR
+		else --you're probably doing something funky here with a custom mode, so here's a backup
+			p.blazeflamecolor = p.skincolor
+		end
+	elseif not (p.blazeflamecolor)
+		p.blazeflamecolor = SKINCOLOR_BLAZING
+	end
+end)
+COM_AddCommand("firecolor", function(p, arg, arg2)
+	if not (gametyperules & GTR_TEAMS)
+		if arg and R_GetColorByName(arg) != SKINCOLOR_NONE and arg != "blazing"  --CBW start
+			if arg2 != "silent"
+				CONS_Printf(p, "Set your custom fire color to " + arg + ".")
+			end
+			if p == consoleplayer
+				local wipefile = io.openlocal(firecolor, "w+")
+				wipefile:write(arg)
+				wipefile:close() --CBW end
+			end
+			p.blazeflamecolor = R_GetColorByName(arg)
+		elseif arg and (arg == "default" or arg == "reset" or arg == "blazing" or arg == "none" or arg == "0")
+			if arg2 != "silent"
+				CONS_Printf(p, "Set your fire color to the default.")
+			end
+			if p == consoleplayer
+				local wipefile = io.openlocal(firecolor, "w+")
+				wipefile:write("blazing")
+				wipefile:close()
+			end
+			p.blazeflamecolor = SKINCOLOR_BLAZING
+		else
+			if arg2 != "silent"
+				CONS_Printf(p, "Changes the color of blaze's fire effects.")
+			end
+			if not (p.blazeflamecolor)
+				p.blazeflamecolor = SKINCOLOR_BLAZING
+			end
+		end
+	elseif arg2 != "silent"
+		CONS_Printf(p, "You can't change your firecolor in team gametypes!")
+	end
+end)
+local effectstoggle = "client/rush/bsav.dat"
+
+rawset(_G, "rusheffects", CV_RegisterVar({
+	name = "rusheffects",
+	defaultvalue = "On",
+	flags = CV_NETVAR|CV_CALL|CV_NOINIT,
+	PossibleValue = CV_OnOff,
+	func = function(cv)
+		if io
+			local file = io.openlocal(effectstoggle, "wb")
+			file:write(cv.value)
+			file:close()
+		end
+	end
+}))
+
+local kitchensync = true
+local file = io.openlocal(effectstoggle)
+if file
+	local num = file:read("*n")
+	if num == 0
+		kitchensync = false
+	end
+	file:close()
+end
+
+if not kitchensync then
+	COM_BufInsertText(server, "rusheffects off")
+end

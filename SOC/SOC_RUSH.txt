@@ -1,0 +1,56 @@
+#Blaze the Cat by Inazuma, Lightdasher, Alice, and Bench.
+#Marine the Raccoon by Lightdasher
+#Lua by Frostiikin, Krabs, Jay, katsy and Snu
+#SFX by AxelMoon
+
+Character
+SkinName = blaze
+DisplayName = Blaze
+TagTextColor = SKINCOLOR_PASTEL
+TagOutlineColor = SKINCOLOR_COBALT
+OppositeColor = SKINCOLOR_PURPLE
+PlayerText = ^9Blaze^0's finesse and handling are unmatched, especially while spinning.
+
+^9Ability:^0
+Accelerator Tornado
+Double jump to rocket upwards with greatly improved handling.
+
+^9Ability:^0 Burst Hover
+Triple jump to hover for a limited time.
+
+^9Ability:^0 Flame Boost
+Run to gain Rush Mode, then press and hold spin to blast away! Be careful not to run into any walls or obstacles.
+#
+
+
+Character
+SkinName = marine
+DisplayName = Marine
+TagTextColor = SKINCOLOR_ORANGE
+TagOutlineColor = SKINCOLOR_CRIMSON
+OppositeColor = SKINCOLOR_GREEN
+PlayerText = ^7Marine^0's unique mechanics allow her to reach incredible heights quickly.
+
+^7Ability:^0 Twirl Float
+Hold down jump to float for a brief time. Run to enter Soaring Mode, and you'll fly instead!
+
+^7Ability:^0 Tail Swipe
+Press spin to swing her tail. It can be used to destroy some walls and power springs.
+
+^7Ability:^0 Bubble Flip
+Jump during a tail swipe to burst forward!
+#
+
+Character
+SkinName = blaze&marine
+PicName = BLARINE
+DisplayName = Blaze#& Marine
+TagTextColor = SKINCOLOR_ORANGE
+TagOutlineColor = SKINCOLOR_PASTEL
+OppositeColor = SKINCOLOR_MATEY
+PlayerText = ^9Blaze^0 and ^7Marine^0 somehow got sucked into Sonic's dimension. Maybe Eggman's new scheme is behind this?
+
+^9Tip:^0 Find Sol Emeralds by defeating each boss without getting hit. Unlock your true potential by collecting all seven!
+
+^7Tip:^0 Those from the Sol dimension may not be able to use Chaos Emeralds, but you may find their powers useful for other purposes.
+#

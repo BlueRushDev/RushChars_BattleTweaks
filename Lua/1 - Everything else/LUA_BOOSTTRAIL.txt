@@ -1,0 +1,56 @@
+//This has to be read after LUA_SOLSTUFF, so it's getting it's own lua file.
+--FixedLerp
+local function FixedLerp(a, b, w)
+    return FixedMul((FRACUNIT - w), a) + FixedMul(w, b)
+end
+
+
+
+addHook("PostThinkFrame", function()
+	for player in players.iterate()
+		local mo = player.mo
+		if not (mo and mo.valid) continue end
+		if (player == nil) or (player.playerstate != PST_LIVE) continue end
+	
+		if (mo.previousx == nil) or (mo.previousy == nil) or (mo.previousz == nil)
+			mo.previousx = mo.x
+			mo.previousy = mo.y
+			mo.previousz = mo.z
+		end
+
+		if (player.mo.skin == "blaze")
+		and player.blazeboosting and (rusheffects.value)
+		
+			for i = 0, 9
+				local percent = FRACUNIT * (i * 10) / 100
+				local trail = P_SpawnGhostMobj(player.mo)
+				--P_SpawnMobjFromMobj(mo, 0, 0, 0, MT_THOK) 
+				local tx = FixedLerp(mo.x,mo.previousx,percent)
+				local ty = FixedLerp(mo.y,mo.previousy,percent)
+				local tz = FixedLerp(mo.z + 3*mo.scale,mo.previousz + 4*mo.scale,percent)
+				P_TeleportMove(trail, tx, ty, tz)
+				trail.color = player.blazeflamecolor
+				trail.colorized = true
+				trail.fuse = 3
+				trail.scalespeed = mo.scale/5
+				trail.scale = mo.scale - (i * FRACUNIT/100)
+				trail.destscale = 0
+                trail.blendmode = AST_ADD
+				if trail.tracer and trail.tracer.valid
+					P_TeleportMove(trail.tracer, tx, ty, tz)
+					trail.tracer.color = player.blazeflamecolor
+					trail.tracer.colorized = true
+					trail.tracer.fuse = 3
+					trail.tracer.scalespeed = mo.scale/5
+					trail.tracer.scale = mo.scale - (i * FRACUNIT/100)
+					trail.tracer.destscale = 0
+					trail.tracer.blendmode = AST_ADD
+				end
+			end
+		end
+
+		mo.previousx = mo.x
+		mo.previousy = mo.y
+		mo.previousz = mo.z
+	end
+end)

@@ -1,0 +1,120 @@
+freeslot(
+"SKINCOLOR_BURNING1",
+"SKINCOLOR_BURNING2",
+"SKINCOLOR_BURNING3",
+"SKINCOLOR_BURNING4",
+"SKINCOLOR_BURNING5",
+"SKINCOLOR_AQUAMARINE1",
+"SKINCOLOR_AQUAMARINE2",
+"SKINCOLOR_AQUAMARINE3",
+"SKINCOLOR_AQUAMARINE4",
+"SKINCOLOR_AQUAMARINE5",
+"SKINCOLOR_BLAZING"
+)
+
+skincolors[SKINCOLOR_BLAZING] = {
+    name = "Blazing",
+    ramp = {1,1,83,83,84,51,52,53,36,37,39,184,185,167,167,168
+},
+    invcolor = SKINCOLOR_SAPPHIRE,
+    invshade = 9,
+    chatcolor = V_ORANGEMAP,
+    accessible = true
+}
+
+skincolors[SKINCOLOR_AQUAMARINE1] = {
+    name = "AQUAMARINE 1",
+    ramp = {0,1,1,2,2,2,2,2,2,88,88,89,121,122,122,123
+},
+    invcolor = SKINCOLOR_ORANGE,
+    invshade = 9,
+    chatcolor = V_BLUEMAP,
+    accessible = false
+}
+skincolors[SKINCOLOR_AQUAMARINE2] = {
+    name = "AQUAMARINE 2",
+    ramp = {0,1,2,2,3,120,120,120,120,121,121,121,123,124,124,124
+},
+    invcolor = SKINCOLOR_ORANGE,
+    invshade = 9,
+    chatcolor = V_BLUEMAP,
+    accessible = false
+}
+skincolors[SKINCOLOR_AQUAMARINE3] = {
+    name = "AQUAMARINE 3",
+    ramp = {0,1,2,128,120,120,120,121,121,140,135,135,135,135,136,137
+},
+    invcolor = SKINCOLOR_ORANGE,
+    invshade = 9,
+    chatcolor = V_BLUEMAP,
+    accessible = false
+}
+skincolors[SKINCOLOR_AQUAMARINE4] = {
+    name = "AQUAMARINE 4",
+    ramp = {0,1,128,120,130,130,131,132,133,135,135,136,136,136,137,138
+
+},
+    invcolor = SKINCOLOR_ORANGE,
+    invshade = 9,
+    chatcolor = V_BLUEMAP,
+    accessible = false
+}
+skincolors[SKINCOLOR_AQUAMARINE5] = {
+    name = "AQUAMARINE 5",
+    ramp = {0,128,129,140,133,133,135,135,136,136,136,137,137,138,138,159
+},
+    invcolor = SKINCOLOR_ORANGE,
+    invshade = 9,
+    chatcolor = V_BLUEMAP,
+    accessible = false
+}
+
+
+
+
+skincolors[SKINCOLOR_BURNING1] = {
+    name = "Burning 1",
+    ramp = {0,0,1,252,208,208,208,48,48,216,217,50,221,33,34,37
+},
+    invcolor = SKINCOLOR_ORANGE,
+    invshade = 9,
+    chatcolor = V_BLUEMAP,
+    accessible = false
+}
+skincolors[SKINCOLOR_BURNING2] = {
+    name = "Burning 2",
+    ramp = {0,1,252,208,208,209,209,210,210,32,32,33,33,34,37,37
+},
+    invcolor = SKINCOLOR_ORANGE,
+    invshade = 9,
+    chatcolor = V_BLUEMAP,
+    accessible = false
+}
+skincolors[SKINCOLOR_BURNING3] = {
+    name = "Burning 3",
+    ramp = {0,1,208,208,209,209,210,32,32,33,33,33,34,38,38,40
+},
+    invcolor = SKINCOLOR_ORANGE,
+    invshade = 9,
+    chatcolor = V_BLUEMAP,
+    accessible = false
+}
+skincolors[SKINCOLOR_BURNING4] = {
+    name = "Burning 4",
+    ramp = {0,252,252,200,200,201,201,202,202,203,34,34,38,39,39,40
+
+},
+    invcolor = SKINCOLOR_ORANGE,
+    invshade = 9,
+    chatcolor = V_BLUEMAP,
+    accessible = false
+}
+skincolors[SKINCOLOR_BURNING5] = {
+    name = "Burning 5",
+    ramp = {0,252,200,200,201,201,202,202,203,203,204,204,204,205,205,206
+},
+    invcolor = SKINCOLOR_ORANGE,
+    invshade = 9,
+    chatcolor = V_BLUEMAP,
+    accessible = false
+}

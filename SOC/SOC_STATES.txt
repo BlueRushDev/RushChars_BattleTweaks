@@ -1,0 +1,118 @@
+State S_PLAY_BLAZE_SPIN
+SpriteName = SPR_PLAY
+SpriteFrame = SPR2_TWIN|FF_ANIMATE
+var2 = 2
+duration = -1
+Next = S_PLAY_STND
+#
+
+State S_PLAY_BLAZE_SPIN_2_BC_IM_LAZY_AS_FUCK
+SpriteName = SPR_PLAY
+SpriteFrame = SPR2_TWIN|FF_ANIMATE
+var2 = 2
+duration = -1
+Next = S_PLAY_STND
+#
+
+State S_PLAY_BLAZE_HOVER
+SpriteName = SPR_PLAY
+SpriteFrame = SPR2_GLID|FF_ANIMATE
+var2 = 2
+duration = -1
+Next = S_PLAY_STND
+#
+
+
+State S_PLAY_BLAZE_SPINDASH
+SpriteName = SPR_PLAY
+SpriteFrame = SPR2_SPIN|FF_ANIMATE
+var1 = 2
+var2 = 2
+duration = -1
+Next = S_PLAY_STND
+#
+
+State S_BLAZETAIL_STAND
+SpriteName = SPR_PLAY
+SpriteFrame = SPR2_TAL0|FF_ANIMATE
+var2 = 4
+duration = -1
+Next = S_PLAY_STND
+#
+
+State S_BLAZETAIL_SPRING
+SpriteName = SPR_PLAY
+SpriteFrame = SPR2_TAL1
+var2 = 0
+duration = 2
+Next = S_BLAZETAIL_SPRING
+#
+
+State S_BLAZETAIL_FALL
+SpriteName = SPR_PLAY
+SpriteFrame = SPR2_TAL2
+var2 = 0
+duration = 2
+Next = S_BLAZETAIL_FALL
+#
+
+State S_BLAZETAIL_RUN
+SpriteName = SPR_PLAY
+SpriteFrame = SPR2_TAL3
+var2 = 0
+duration = 2
+Next = S_BLAZETAIL_RUN
+#
+
+State S_BLAZETAIL_INVIS
+SpriteName = SPR_PLAY
+SpriteFrame = SPR2_TAL4|FF_ANIMATE
+var2 = 2
+duration = -1
+Next = S_PLAY_STND
+#
+
+State S_PLAY_JETSKIRIDE
+SpriteName = SPR_PLAY
+SpriteFrame = SPR2_JSKI
+var2 = 2
+duration = -1
+Next = S_PLAY_STND
+#
+
+State S_MARINE_CHAOSRIDE
+SpriteName = SPR_PLAY
+SpriteFrame = SPR2_BNCE
+var2 = 2
+duration = -1
+Next = S_PLAY_STND
+#
+
+State S_MARINE_JOJOKE
+SpriteName = SPR_PLAY
+SpriteFrame = SPR2_GLID|FF_ANIMATE
+var2 = 4
+duration = -1
+Next = S_PLAY_STND
+#
+
+State S_MARINE_JOJOKE_AURA
+SpriteName = SPR_PLAY
+SpriteFrame = SPR2_LAND|FF_ANIMATE
+var2 = 2
+duration = -1
+Next = S_PLAY_STND
+#
+
+Freeslot
+SPR2_FKIK
+SPR2_OOF_
+
+
+Sprite2 SPR2_FKIK
+Default = SPR2_WALK
+
+
+Sprite2 SPR2_OOF_
+Default = SPR2_PAIN
+#
